@@ -4,19 +4,19 @@ namespace PII_Game_Of_Life
 {
     public class Gameboard
     {
-        public bool [,] gameBoard;
+        public bool [,] GameboardState;
         int boardWidth;
         int boardHeight;
-        public void Gameboard () 
 
+        public Gameboard() 
         {
-            public bool [,] gameBoard = Leertxt();
-            int boardWidth = gameBoard.GetLength(0);
-            int boardHeight = gameBoard.GetLength(1);
+            this.GameboardState = Leerarchivo.Leertxt();
+            int boardWidth = GameboardState.GetLength(0);
+            int boardHeight = GameboardState.GetLength(1);
         }
         
 
-        public void Rungame ()
+        public void RunGame()
         {
             bool[,] cloneboard = new bool[boardWidth, boardHeight];
             for (int x = 0; x < boardWidth; x++)
@@ -28,27 +28,27 @@ namespace PII_Game_Of_Life
                     {
                         for (int j = y-1;j<=y+1;j++)
                         {
-                            if(i>=0 && i<boardWidth && j>=0 && j < boardHeight && gameBoard[i,j])
+                            if(i>=0 && i<boardWidth && j>=0 && j < boardHeight && GameboardState[i,j])
                             {
                                 aliveNeighbors++;
                             }
                         }
                     }
-                    if(gameBoard[x,y])
+                    if(GameboardState[x,y])
                     {
                         aliveNeighbors--;
                     }
-                    if (gameBoard[x,y] && aliveNeighbors < 2)
+                    if (GameboardState[x,y] && aliveNeighbors < 2)
                     {
                         //Celula muere por baja población
                         cloneboard[x,y] = false;
                     }
-                    else if (gameBoard[x,y] && aliveNeighbors > 3)
+                    else if (GameboardState[x,y] && aliveNeighbors > 3)
                     {
                         //Celula muere por sobrepoblación
                         cloneboard[x,y] = false;
                     }
-                    else if (!gameBoard[x,y] && aliveNeighbors == 3)
+                    else if (!GameboardState[x,y] && aliveNeighbors == 3)
                     {
                         //Celula nace por reproducción
                         cloneboard[x,y] = true;
@@ -56,10 +56,12 @@ namespace PII_Game_Of_Life
                     else
                     {
                         //Celula mantiene el estado que tenía
-                        cloneboard[x,y] = gameBoard[x,y];
+                        cloneboard[x,y] = GameboardState[x,y];
                     }
                 }
             }
+            GameboardState = cloneboard;
+            cloneboard = new bool[boardWidth, boardHeight];
         }
     }
 }
