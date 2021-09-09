@@ -1,10 +1,11 @@
 using System;
+using System.IO;
 
 namespace PII_Game_Of_Life
 {
-    public class Leerarchivo
+    static class Leerarchivo
     {
-        public bool[,] Leertxt()
+        public static bool[,] Leertxt()
         {
             string url = "ruta del archivo";
             string content = File.ReadAllText(url);
